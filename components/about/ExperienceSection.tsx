@@ -31,7 +31,7 @@ export default function ExperienceSection() {
                   i % 2 === 0 ? "md:pr-10 md:text-right" : "md:pl-10"
                 }`}
               >
-                <div className="rounded-xl border border-[var(--border)] bg-[var(--card)] p-5">
+                <div className="rounded-xl glass card-lift p-5">
                   <span className="text-xs font-medium text-[var(--accent-from)]">
                     {exp.startDate} — {exp.endDate}
                   </span>

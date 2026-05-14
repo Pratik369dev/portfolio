@@ -6,13 +6,11 @@ export default function HeroSection() {
   return (
     <section className="relative overflow-hidden py-20 md:py-32">
       {/* Decorative gradient background */}
-      <div className="absolute inset-0 -z-10">
-        <div className="absolute inset-0 bg-gradient-to-b from-[var(--accent-from)]/5 to-transparent" />
-        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 h-96 w-96 rounded-full bg-[var(--accent-from)]/10 blur-3xl" />
-      </div>
+      <div className="absolute inset-0 -z-10 aurora-bg opacity-40" />
+      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 h-[500px] w-[500px] -z-10 morph-blob" />
 
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 text-center">
-        <div className="inline-flex items-center gap-2 rounded-full border border-[var(--border)] bg-[var(--card)] px-4 py-1.5 text-sm text-[var(--muted-foreground)] mb-8">
+        <div className="inline-flex items-center gap-2 rounded-full glass-subtle px-4 py-1.5 text-sm text-[var(--muted-foreground)] mb-8">
           <Play className="h-3.5 w-3.5 text-[var(--accent-from)]" />
           Available for freelance projects
         </div>

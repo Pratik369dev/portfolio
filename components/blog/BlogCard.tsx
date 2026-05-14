@@ -6,7 +6,7 @@ export default function BlogCard({ post }: { post: BlogPost }) {
   return (
     <Link
       href={`/blog/${post.slug}`}
-      className="block rounded-2xl border border-[var(--border)] bg-[var(--card)] p-6 transition-all hover:border-[var(--accent-from)]/30 hover:shadow-md"
+      className="block rounded-2xl glass card-lift surface-glow p-6"
     >
       <div className="flex items-center gap-3 text-sm text-[var(--muted-foreground)] mb-3">
         <time dateTime={post.date}>

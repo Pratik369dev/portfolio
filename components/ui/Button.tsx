@@ -32,7 +32,7 @@ export default function Button({
   children,
   ...props
 }: ButtonProps) {
-  const classes = `inline-flex items-center justify-center font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-[var(--accent-from)]/50 ${variantClasses[variant]} ${sizeClasses[size]} ${className}`;
+  const classes = `glass-btn inline-flex items-center justify-center ${variantClasses[variant]} ${sizeClasses[size]} ${className}`;
 
   if (href) {
     return (

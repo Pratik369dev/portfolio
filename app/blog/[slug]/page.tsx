@@ -40,7 +40,7 @@ export default async function BlogPostPage({ params }: PageProps) {
     <article className="mx-auto max-w-3xl px-4 py-16 sm:px-6 lg:px-8">
       <Link
         href="/blog"
-        className="inline-flex items-center gap-1.5 text-sm text-[var(--muted-foreground)] hover:text-[var(--foreground)] transition-colors mb-8"
+        className="inline-flex items-center gap-1.5 text-sm text-[var(--muted-foreground)] hover:text-[var(--foreground)] link-underline mb-8"
       >
         <ArrowLeft className="h-4 w-4" />
         Back to Blog

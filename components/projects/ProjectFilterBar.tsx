@@ -30,7 +30,7 @@ export default function ProjectFilterBar({
           className={`rounded-full px-4 py-2 text-sm font-medium transition-all ${
             active === cat
               ? "bg-gradient-to-r from-[var(--accent-from)] to-[var(--accent-to)] text-white shadow-md"
-              : "border border-[var(--border)] bg-[var(--card)] text-[var(--muted-foreground)] hover:text-[var(--foreground)] hover:border-[var(--accent-from)]/30"
+              : "glass-subtle text-[var(--muted-foreground)] hover:text-[var(--foreground)]"
           }`}
         >
           {cat === "all" ? "All" : categoryLabels[cat]}

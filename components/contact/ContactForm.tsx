@@ -56,7 +56,7 @@ export default function ContactForm() {
 
   if (submitted) {
     return (
-      <div className="flex flex-col items-center justify-center rounded-2xl border border-green-200 bg-green-50 p-10 text-center dark:border-green-900 dark:bg-green-950">
+      <div className="flex flex-col items-center justify-center rounded-2xl glass p-10 text-center">
         <CheckCircle className="h-12 w-12 text-green-600 dark:text-green-400" />
         <h3 className="mt-4 text-lg font-semibold">Message Sent!</h3>
         <p className="mt-1 text-sm text-[var(--muted-foreground)]">
@@ -87,7 +87,7 @@ export default function ContactForm() {
           type="text"
           value={form.name}
           onChange={(e) => setForm({ ...form, name: e.target.value })}
-          className="w-full rounded-xl border border-[var(--border)] bg-[var(--card)] px-4 py-2.5 text-sm outline-none transition-colors focus:border-[var(--accent-from)] focus:ring-2 focus:ring-[var(--accent-from)]/20"
+          className="w-full glass-input"
           placeholder="Your name"
         />
         {errors.name && (
@@ -107,7 +107,7 @@ export default function ContactForm() {
           type="email"
           value={form.email}
           onChange={(e) => setForm({ ...form, email: e.target.value })}
-          className="w-full rounded-xl border border-[var(--border)] bg-[var(--card)] px-4 py-2.5 text-sm outline-none transition-colors focus:border-[var(--accent-from)] focus:ring-2 focus:ring-[var(--accent-from)]/20"
+          className="w-full glass-input"
           placeholder="you@example.com"
         />
         {errors.email && (
@@ -127,7 +127,7 @@ export default function ContactForm() {
           rows={5}
           value={form.message}
           onChange={(e) => setForm({ ...form, message: e.target.value })}
-          className="w-full rounded-xl border border-[var(--border)] bg-[var(--card)] px-4 py-2.5 text-sm outline-none transition-colors focus:border-[var(--accent-from)] focus:ring-2 focus:ring-[var(--accent-from)]/20 resize-none"
+          className="w-full glass-input resize-none"
           placeholder="Tell me about your project..."
         />
         {errors.message && (

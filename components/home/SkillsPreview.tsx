@@ -32,7 +32,7 @@ export default function SkillsPreview() {
             <Link
               key={skill.name}
               href="/about#skills"
-              className="group rounded-2xl border border-[var(--border)] bg-[var(--card)] p-6 transition-all hover:border-[var(--accent-from)]/30 hover:shadow-md"
+              className="group rounded-2xl glass card-lift surface-glow p-6"
             >
               <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-[var(--accent-from)]/10 to-[var(--accent-to)]/10 group-hover:from-[var(--accent-from)]/20 group-hover:to-[var(--accent-to)]/20 transition-colors">
                 <Icon className="h-6 w-6 text-[var(--accent-from)]" />

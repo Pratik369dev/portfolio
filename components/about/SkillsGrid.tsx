@@ -27,7 +27,7 @@ export default function SkillsGrid() {
           return (
             <div
               key={skill.name}
-              className="rounded-2xl border border-[var(--border)] bg-[var(--card)] p-6"
+              className="rounded-2xl glass card-lift p-6"
             >
               <div className="flex items-center gap-3">
                 <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-[var(--accent-from)]/10 to-[var(--accent-to)]/10">

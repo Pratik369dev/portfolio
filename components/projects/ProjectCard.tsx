@@ -15,7 +15,7 @@ export default function ProjectCard({ project }: { project: Project }) {
         href={project.url || `/projects`}
         target={project.url ? "_blank" : undefined}
         rel={project.url ? "noopener noreferrer" : undefined}
-        className="block overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--card)] transition-shadow hover:shadow-lg"
+        className="block overflow-hidden rounded-2xl glass card-lift"
       >
         <div className="relative aspect-video overflow-hidden bg-[var(--muted)]">
           <Image

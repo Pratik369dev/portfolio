@@ -40,7 +40,7 @@ export default function ContactPage() {
             </div>
           </div>
 
-          <div className="rounded-xl border border-[var(--border)] bg-[var(--muted)]/50 p-5">
+          <div className="rounded-xl glass p-5">
             <p className="text-sm text-[var(--muted-foreground)] leading-relaxed">
               Currently available for freelance projects. Whether you need video
               editing, motion graphics, color grading, or a custom website — I

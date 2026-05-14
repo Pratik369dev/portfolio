@@ -5,7 +5,7 @@ export default function BioSection() {
     <section className="py-16 md:py-24">
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col items-center gap-12 md:flex-row">
-          <div className="relative h-64 w-64 shrink-0 overflow-hidden rounded-2xl bg-[var(--muted)] md:h-80 md:w-80">
+          <div className="relative h-64 w-64 shrink-0 overflow-hidden rounded-2xl glass-subtle md:h-80 md:w-80">
             <Image
               src="/images/Photo.png"
               alt="Portrait"

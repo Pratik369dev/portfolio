@@ -2,59 +2,776 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
 
+/* ─────────────────────────────────────
+   Theme Tokens
+   ───────────────────────────────────── */
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+
+  /* Core animations */
   --animate-fade-in: fadeIn 0.6s ease-out;
   --animate-slide-up: slideUp 0.6s ease-out;
   --animate-slide-down: slideDown 0.4s ease-out;
+
+  /* Glass & liquid animations */
+  --animate-glass-shimmer: glassShimmer 8s ease-in-out infinite;
+  --animate-aurora: aurora 20s ease-in-out infinite;
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-pulse-glow: pulseGlow 3s ease-in-out infinite;
+  --animate-morph: morphBlob 12s ease-in-out infinite;
+  --animate-border-glow: borderGlow 4s ease-in-out infinite;
+  --animate-scale-spring: scaleSpring 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  --animate-liquid-reveal: liquidReveal 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  --animate-shimmer-line: shimmerLine 2s ease-in-out infinite;
 }
 
+/* ─────────────────────────────────────
+   Design Tokens — Light
+   ───────────────────────────────────── */
 :root {
-  --background: #ffffff;
-  --foreground: #0f172a;
+  /* Surfaces */
+  --background: #fafafa;
+  --foreground: #0b1120;
   --accent-from: #6366f1;
   --accent-to: #a855f7;
+  --accent-glow: rgba(99, 102, 241, 0.35);
   --muted: #f1f5f9;
   --muted-foreground: #64748b;
   --border: #e2e8f0;
+  --border-light: rgba(226, 232, 240, 0.6);
   --card: #ffffff;
+  --card-hover: #fafbff;
+
+  /* Glass surface tokens */
+  --glass-bg: rgba(255, 255, 255, 0.55);
+  --glass-bg-subtle: rgba(255, 255, 255, 0.35);
+  --glass-bg-strong: rgba(255, 255, 255, 0.75);
+  --glass-border: rgba(255, 255, 255, 0.6);
+  --glass-border-hover: rgba(255, 255, 255, 0.9);
+  --glass-highlight: rgba(255, 255, 255, 0.7);
+  --glass-shadow: rgba(0, 0, 0, 0.04);
+  --glass-shadow-ambient: rgba(0, 0, 0, 0.02);
+  --glass-blur: 20px;
+  --glass-saturate: 1.8;
+
+  /* Elevation shadows */
+  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.03);
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.03);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.05), 0 2px 4px rgba(0, 0, 0, 0.03);
+  --shadow-lg: 0 12px 40px rgba(0, 0, 0, 0.06), 0 4px 12px rgba(0, 0, 0, 0.03);
+  --shadow-xl: 0 24px 64px rgba(0, 0, 0, 0.07), 0 8px 24px rgba(0, 0, 0, 0.04);
+  --shadow-glass: 0 8px 32px rgba(0, 0, 0, 0.04), 0 2px 8px rgba(0, 0, 0, 0.02), inset 0 1px 0 rgba(255, 255, 255, 0.6);
+
+  /* Radius */
+  --radius-sm: 0.5rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.25rem;
+  --radius-2xl: 1.5rem;
+  --radius-3xl: 2rem;
+
+  /* Transitions */
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-liquid: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+  --duration-fast: 150ms;
+  --duration-normal: 250ms;
+  --duration-slow: 400ms;
+  --duration-glacial: 800ms;
 }
 
+/* ─────────────────────────────────────
+   Design Tokens — Dark
+   ───────────────────────────────────── */
 .dark {
   --background: #020617;
   --foreground: #f1f5f9;
   --accent-from: #818cf8;
   --accent-to: #c084fc;
+  --accent-glow: rgba(129, 140, 248, 0.3);
   --muted: #1e293b;
   --muted-foreground: #94a3b8;
   --border: #1e293b;
+  --border-light: rgba(30, 41, 59, 0.6);
   --card: #0f172a;
+  --card-hover: #111a30;
+
+  /* Glass surface tokens — dark mode */
+  --glass-bg: rgba(15, 23, 42, 0.55);
+  --glass-bg-subtle: rgba(15, 23, 42, 0.35);
+  --glass-bg-strong: rgba(15, 23, 42, 0.78);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --glass-border-hover: rgba(255, 255, 255, 0.14);
+  --glass-highlight: rgba(255, 255, 255, 0.04);
+  --glass-shadow: rgba(0, 0, 0, 0.2);
+  --glass-shadow-ambient: rgba(0, 0, 0, 0.15);
+  --glass-blur: 20px;
+  --glass-saturate: 2;
+
+  /* Elevation shadows — dark */
+  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.2);
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.25), 0 1px 2px rgba(0, 0, 0, 0.2);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.3), 0 2px 4px rgba(0, 0, 0, 0.2);
+  --shadow-lg: 0 12px 40px rgba(0, 0, 0, 0.4), 0 4px 12px rgba(0, 0, 0, 0.2);
+  --shadow-xl: 0 24px 64px rgba(0, 0, 0, 0.5), 0 8px 24px rgba(0, 0, 0, 0.3);
+  --shadow-glass: 0 8px 32px rgba(0, 0, 0, 0.3), 0 2px 8px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.06);
 }
 
+/* ─────────────────────────────────────
+   Keyframes — Core
+   ───────────────────────────────────── */
 @keyframes fadeIn {
   from { opacity: 0; }
   to { opacity: 1; }
 }
 
 @keyframes slideUp {
-  from { opacity: 0; transform: translateY(20px); }
+  from { opacity: 0; transform: translateY(24px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes slideDown {
-  from { opacity: 0; transform: translateY(-10px); }
+  from { opacity: 0; transform: translateY(-12px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
+/* ─────────────────────────────────────
+   Keyframes — Glass & Liquid
+   ───────────────────────────────────── */
+
+/* Glass shimmer — a subtle diagonal light sweep across glass surfaces */
+@keyframes glassShimmer {
+  0%, 100% { background-position: 200% 50%; }
+  50% { background-position: 0% 50%; }
+}
+
+/* Aurora — slow-moving gradient field for hero backgrounds */
+@keyframes aurora {
+  0% { background-position: 0% 50%, 100% 50%; }
+  25% { background-position: 50% 0%, 50% 100%; }
+  50% { background-position: 100% 50%, 0% 50%; }
+  75% { background-position: 50% 100%, 50% 0%; }
+  100% { background-position: 0% 50%, 100% 50%; }
+}
+
+/* Float — gentle vertical bob */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  33% { transform: translateY(-6px); }
+  66% { transform: translateY(4px); }
+}
+
+/* Pulse glow — breathing accent glow */
+@keyframes pulseGlow {
+  0%, 100% { box-shadow: 0 0 20px var(--accent-glow), 0 0 60px rgba(99, 102, 241, 0.1); }
+  50% { box-shadow: 0 0 40px var(--accent-glow), 0 0 100px rgba(99, 102, 241, 0.2); }
+}
+
+/* Morph blob — fluid shape-shifting */
+@keyframes morphBlob {
+  0%, 100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+  25% { border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%; }
+  50% { border-radius: 40% 60% 30% 60% / 50% 40% 60% 30%; }
+  75% { border-radius: 60% 40% 50% 50% / 30% 60% 40% 70%; }
+}
+
+/* Border glow — animated gradient border */
+@keyframes borderGlow {
+  0%, 100% { border-color: var(--accent-from); }
+  50% { border-color: var(--accent-to); }
+}
+
+/* Scale spring — bouncy scale with overshoot */
+@keyframes scaleSpring {
+  0% { opacity: 0; transform: scale(0.92); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+/* Liquid reveal — expands with a fluid easing */
+@keyframes liquidReveal {
+  0% { opacity: 0; transform: translateY(16px) scale(0.97); filter: blur(4px); }
+  100% { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+}
+
+/* Shimmer line — animated highlight streak (use with gradient bg) */
+@keyframes shimmerLine {
+  0% { transform: translateX(-100%) skewX(-12deg); }
+  100% { transform: translateX(200%) skewX(-12deg); }
+}
+
+/* Rotate gradient — slow rotation for gradient orbs */
+@keyframes rotateGradient {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Ripple — expanding ring for click feedback */
+@keyframes ripple {
+  0% { transform: scale(0); opacity: 0.35; }
+  100% { transform: scale(2.5); opacity: 0; }
+}
+
+/* ─────────────────────────────────────
+   Base Layer
+   ───────────────────────────────────── */
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-sans), system-ui, sans-serif;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  font-family: var(--font-sans), system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  transition: background-color var(--duration-slow) var(--ease-smooth),
+              color var(--duration-slow) var(--ease-smooth);
 }
 
+/* Smooth scrolling — with a touch of friction for premium feel */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
+}
 
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
 
+/* ─────────────────────────────────────
+   Selection
+   ───────────────────────────────────── */
+::selection {
+  background: rgba(99, 102, 241, 0.2);
+  color: var(--foreground);
+  text-shadow: none;
+}
+
+.dark ::selection {
+  background: rgba(129, 140, 248, 0.25);
+}
+
+/* ─────────────────────────────────────
+   Focus Ring — Apple-style
+   ───────────────────────────────────── */
+:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px var(--accent-glow);
+  border-radius: 4px;
+}
+
+/* ─────────────────────────────────────
+   Scrollbar — Liquid Glass
+   ───────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 9999px;
+  transition: background var(--duration-normal) var(--ease-smooth);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--muted-foreground);
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: rgba(148, 163, 184, 0.2);
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: rgba(148, 163, 184, 0.35);
+}
+
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--border) transparent;
+}
+
+/* ─────────────────────────────────────
+   ╔══════════════════════════════════╗
+   ║     LIQUID GLASS SYSTEM         ║
+   ╚══════════════════════════════════╝
+   ───────────────────────────────────── */
+
+/*
+   Glass hierarchy:
+   .glass         — Standard glass card (default for panels, cards)
+   .glass-subtle  — Very light glass (hover previews, tooltips)
+   .glass-strong  — Opaque glass (modals, dialogs, sheets)
+   .glass-nav     — Navigation glass (headers, tabs)
+   .glass-input   — Form glass (inputs, textareas)
+*/
+
+/* ── Glass Standard ────────────────── */
+.glass {
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--shadow-glass);
+  transition:
+    background var(--duration-normal) var(--ease-smooth),
+    border-color var(--duration-normal) var(--ease-smooth),
+    box-shadow var(--duration-normal) var(--ease-smooth),
+    transform var(--duration-normal) var(--ease-spring);
+}
+
+.glass:hover {
+  border-color: var(--glass-border-hover);
+  box-shadow:
+    0 12px 40px var(--glass-shadow),
+    0 4px 12px var(--glass-shadow-ambient),
+    inset 0 1px 0 var(--glass-highlight);
+}
+
+.glass:active {
+  transform: scale(0.985);
+  transition: transform 80ms var(--ease-smooth);
+}
+
+/* ── Glass Subtle ──────────────────── */
+.glass-subtle {
+  background: var(--glass-bg-subtle);
+  backdrop-filter: blur(12px) saturate(var(--glass-saturate));
+  -webkit-backdrop-filter: blur(12px) saturate(var(--glass-saturate));
+  border: 1px solid var(--glass-border);
+  transition:
+    background var(--duration-normal) var(--ease-smooth),
+    border-color var(--duration-normal) var(--ease-smooth);
+}
+
+.glass-subtle:hover {
+  background: var(--glass-bg);
+  border-color: var(--glass-border-hover);
+}
+
+/* ── Glass Strong ──────────────────── */
+.glass-strong {
+  background: var(--glass-bg-strong);
+  backdrop-filter: blur(28px) saturate(var(--glass-saturate));
+  -webkit-backdrop-filter: blur(28px) saturate(var(--glass-saturate));
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--shadow-xl), inset 0 1px 0 var(--glass-highlight);
+}
+
+/* ── Glass Nav ─────────────────────── */
+.glass-nav {
+  background: var(--glass-bg-strong);
+  backdrop-filter: blur(24px) saturate(var(--glass-saturate));
+  -webkit-backdrop-filter: blur(24px) saturate(var(--glass-saturate));
+  border-bottom: 1px solid var(--glass-border);
+  box-shadow: 0 1px 3px var(--glass-shadow-ambient);
+}
+
+/* ── Glass Input ───────────────────── */
+.glass-input {
+  background: var(--glass-bg-subtle);
+  backdrop-filter: blur(8px) saturate(var(--glass-saturate));
+  -webkit-backdrop-filter: blur(8px) saturate(var(--glass-saturate));
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-lg);
+  padding: 0.625rem 1rem;
+  color: var(--foreground);
+  font-size: 0.875rem;
+  outline: none;
+  transition:
+    background var(--duration-fast) var(--ease-smooth),
+    border-color var(--duration-fast) var(--ease-smooth),
+    box-shadow var(--duration-fast) var(--ease-smooth);
+}
+
+.glass-input::placeholder {
+  color: var(--muted-foreground);
+  opacity: 0.7;
+}
+
+.glass-input:focus {
+  background: var(--glass-bg);
+  border-color: var(--accent-from);
+  box-shadow: 0 0 0 3px var(--accent-glow),
+              inset 0 1px 0 var(--glass-highlight);
+}
+
+.glass-input:hover:not(:focus) {
+  border-color: var(--glass-border-hover);
+  background: var(--glass-bg);
+}
+
+/* ── Glass Panel (elevated card) ───── */
+.glass-panel {
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-2xl);
+  box-shadow: var(--shadow-lg), inset 0 1px 0 var(--glass-highlight);
+  transition:
+    box-shadow var(--duration-normal) var(--ease-smooth),
+    border-color var(--duration-normal) var(--ease-smooth);
+}
+
+.glass-panel:hover {
+  box-shadow: var(--shadow-xl), inset 0 1px 0 var(--glass-highlight);
+  border-color: var(--glass-border-hover);
+}
+
+/* ─────────────────────────────────────
+   Liquid Button Enhancements
+   ───────────────────────────────────── */
+
+/* Button base refinement — applied globally */
+.glass-btn {
+  position: relative;
+  overflow: hidden;
+  font-weight: 500;
+  border-radius: var(--radius-xl);
+  transition:
+    all var(--duration-normal) var(--ease-spring),
+    box-shadow var(--duration-normal) var(--ease-smooth);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Ripple effect on click */
+.glass-btn::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, rgba(255,255,255,0.3) 0%, transparent 60%);
+  opacity: 0;
+  transition: opacity var(--duration-fast) var(--ease-smooth);
+}
+
+.glass-btn:active::after {
+  opacity: 1;
+  transition: opacity 0ms;
+}
+
+.glass-btn:active {
+  transform: scale(0.96);
+  transition: transform 80ms var(--ease-smooth);
+}
+
+/* ─────────────────────────────────────
+   Aurora Background
+   ───────────────────────────────────── */
+.aurora-bg {
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 0%, var(--accent-from) 0%, transparent 50%),
+    radial-gradient(ellipse 60% 80% at 0% 100%, var(--accent-to) 0%, transparent 50%),
+    radial-gradient(ellipse 70% 60% at 100% 0%, var(--accent-from) 0%, transparent 50%);
+  background-size: 200% 200%;
+  animation: aurora 20s ease-in-out infinite;
+}
+
+/* ─────────────────────────────────────
+   Shimmer Overlay
+   Animated light streak for glass highlights
+   ───────────────────────────────────── */
+.shimmer-overlay {
+  position: relative;
+  overflow: hidden;
+}
+
+.shimmer-overlay::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(
+    105deg,
+    transparent 40%,
+    rgba(255, 255, 255, 0.08) 45%,
+    rgba(255, 255, 255, 0.15) 50%,
+    rgba(255, 255, 255, 0.08) 55%,
+    transparent 60%
+  );
+  background-size: 200% 100%;
+  animation: glassShimmer 8s ease-in-out infinite;
+}
+
+.dark .shimmer-overlay::before {
+  background: linear-gradient(
+    105deg,
+    transparent 40%,
+    rgba(255, 255, 255, 0.03) 45%,
+    rgba(255, 255, 255, 0.06) 50%,
+    rgba(255, 255, 255, 0.03) 55%,
+    transparent 60%
+  );
+}
+
+/* ─────────────────────────────────────
+   Gradient Text — Animated
+   ───────────────────────────────────── */
+.text-gradient {
+  background: linear-gradient(
+    135deg,
+    var(--accent-from) 0%,
+    var(--accent-to) 50%,
+    var(--accent-from) 100%
+  );
+  background-size: 200% auto;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: glassShimmer 4s linear infinite;
+}
+
+/* ─────────────────────────────────────
+   Gradient Border — Animated
+   Uses mask or background-clip technique
+   ───────────────────────────────────── */
+.gradient-border {
+  position: relative;
+}
+
+.gradient-border::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(
+    135deg,
+    var(--accent-from),
+    var(--accent-to),
+    var(--accent-from)
+  );
+  background-size: 200% 200%;
+  animation: glassShimmer 4s linear infinite;
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  pointer-events: none;
+}
+
+/* ─────────────────────────────────────
+   Morph Blob — Decorative
+   For hero backgrounds / decorative shapes
+   ───────────────────────────────────── */
+.morph-blob {
+  border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+  background: linear-gradient(
+    135deg,
+    var(--accent-from),
+    var(--accent-to)
+  );
+  filter: blur(60px);
+  opacity: 0.15;
+  animation: morphBlob 12s ease-in-out infinite;
+  will-change: border-radius;
+}
+
+/* ─────────────────────────────────────
+   Card Hover Lift
+   ───────────────────────────────────── */
+.card-lift {
+  transition:
+    transform var(--duration-normal) var(--ease-spring),
+    box-shadow var(--duration-normal) var(--ease-smooth);
+}
+
+.card-lift:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+.card-lift:active {
+  transform: translateY(-1px) scale(0.99);
+  transition: transform 80ms var(--ease-smooth);
+}
+
+/* ─────────────────────────────────────
+   Link Underline — Animated
+   ───────────────────────────────────── */
+.link-underline {
+  position: relative;
+  text-decoration: none;
+}
+
+.link-underline::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  height: 1.5px;
+  background: linear-gradient(to right, var(--accent-from), var(--accent-to));
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform var(--duration-normal) var(--ease-liquid);
+}
+
+.link-underline:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* ─────────────────────────────────────
+   Noise Texture Overlay
+   Adds subtle grain for glass realism
+   ───────────────────────────────────── */
+.noise-texture {
+  position: relative;
+}
+
+.noise-texture::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  border-radius: inherit;
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 128px 128px;
+}
+
+.dark .noise-texture::before {
+  opacity: 0.04;
+}
+
+/* ─────────────────────────────────────
+   Surface Glow — Accented card glow
+   Appears on hover for elevated cards
+   ───────────────────────────────────── */
+.surface-glow {
+  transition:
+    box-shadow var(--duration-normal) var(--ease-smooth),
+    border-color var(--duration-normal) var(--ease-smooth);
+}
+
+.surface-glow:hover {
+  border-color: rgba(99, 102, 241, 0.2);
+  box-shadow:
+    0 0 0 1px rgba(99, 102, 241, 0.08),
+    0 8px 32px rgba(99, 102, 241, 0.06);
+}
+
+.dark .surface-glow:hover {
+  border-color: rgba(129, 140, 248, 0.2);
+  box-shadow:
+    0 0 0 1px rgba(129, 140, 248, 0.1),
+    0 8px 32px rgba(129, 140, 248, 0.08);
+}
+
+/* ─────────────────────────────────────
+   Skeleton Loading — Glass shimmer
+   ───────────────────────────────────── */
+.skeleton {
+  background: linear-gradient(
+    105deg,
+    var(--muted) 0%,
+    var(--muted) 40%,
+    rgba(255, 255, 255, 0.1) 45%,
+    rgba(255, 255, 255, 0.15) 50%,
+    rgba(255, 255, 255, 0.1) 55%,
+    var(--muted) 60%,
+    var(--muted) 100%
+  );
+  background-size: 200% 100%;
+  animation: glassShimmer 2s ease-in-out infinite;
+  border-radius: var(--radius-md);
+}
+
+.dark .skeleton {
+  background: linear-gradient(
+    105deg,
+    var(--muted) 0%,
+    var(--muted) 40%,
+    rgba(255, 255, 255, 0.03) 45%,
+    rgba(255, 255, 255, 0.06) 50%,
+    rgba(255, 255, 255, 0.03) 55%,
+    var(--muted) 60%,
+    var(--muted) 100%
+  );
+  background-size: 200% 100%;
+}
+
+/* ─────────────────────────────────────
+   Divider — Gradient rule
+   ───────────────────────────────────── */
+.glass-divider {
+  height: 1px;
+  border: none;
+  background: linear-gradient(
+    to right,
+    transparent,
+    var(--border) 20%,
+    var(--border) 80%,
+    transparent
+  );
+}
+
+/* ─────────────────────────────────────
+   Tap Highlight — Remove on mobile
+   ───────────────────────────────────── */
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* ─────────────────────────────────────
+   Image — Optimized rendering
+   ───────────────────────────────────── */
+img {
+  -webkit-user-drag: none;
+  user-select: none;
+}
+
+/* ─────────────────────────────────────
+   Reduced motion
+   ───────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .morph-blob,
+  .aurora-bg,
+  .shimmer-overlay::before,
+  .text-gradient,
+  .gradient-border::before {
+    animation: none !important;
+  }
+}
+
+/* ─────────────────────────────────────
+   Print styles
+   ───────────────────────────────────── */
+@media print {
+  .glass,
+  .glass-subtle,
+  .glass-strong,
+  .glass-nav,
+  .glass-panel {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    background: white;
+    border: 1px solid #ccc;
+    box-shadow: none;
+  }
+
+  body {
+    background: white;
+    color: black;
+  }
+
+  .dark body {
+    background: white;
+    color: black;
+  }
+}

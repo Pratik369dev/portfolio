@@ -19,7 +19,7 @@ export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-[var(--border)] bg-[var(--background)]/80 backdrop-blur-md">
+    <header className="sticky top-0 z-50 glass-nav">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
         <Link
           href="/"
@@ -67,7 +67,7 @@ export default function Header() {
 
       {/* Mobile nav dropdown */}
       {menuOpen && (
-        <nav className="border-t border-[var(--border)] bg-[var(--background)] md:hidden animate-[slideDown_0.2s_ease-out]">
+        <nav className="border-t border-[var(--border)] glass-strong md:hidden animate-[slideDown_0.2s_ease-out]">
           <div className="flex flex-col px-4 py-3 space-y-1">
             {navLinks.map((link) => (
               <Link
